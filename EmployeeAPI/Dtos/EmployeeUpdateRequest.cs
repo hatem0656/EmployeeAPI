@@ -6,7 +6,7 @@ namespace EmployeeAPI.Dtos
 {
     public class EmployeeUpdateRequest
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [MaxLength(20)]
         [NoSpaces]

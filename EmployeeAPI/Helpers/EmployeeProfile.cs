@@ -14,18 +14,17 @@ namespace EmployeeAPI.Helpers
             CreateMap<AddressDto, Address>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()));
 
-            CreateMap<UpdatedAddressDto, Address>();
-                 //.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-                 //.ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-                 //.ForMember(dest => dest.EmployeeId, opt => opt.Ignore());
-                 
+            CreateMap<UpdatedAddressDto, Address>()
+                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => new Guid(src.Id)));
+                
+
 
             CreateMap<Employee, EmployeeDto>();
 
             CreateMap<EmployeeAddRequest, Employee>();
 
-            CreateMap<EmployeeUpdateRequest, Employee>();
-                 
+            CreateMap<EmployeeUpdateRequest, Employee>()
+                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => new Guid(src.Id)));
 
             ; 
         }

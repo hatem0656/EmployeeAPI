@@ -25,7 +25,15 @@ builder.Services.AddAutoMapper(typeof(Program));
 // Services Injection
 builder.Services.AddTransient<IEmployeeService,EmployeeService>();
 
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "TrustedEndpoints",
+                      policy =>
+                      {
+                          //policy.WithOrigins("http://localhost:3000/").AllowAnyHeader().AllowAnyMethod();
+                          policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                      });
+});
 
 var app = builder.Build();
 
@@ -37,6 +45,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("TrustedEndpoints");
 
 app.UseAuthorization();
 
